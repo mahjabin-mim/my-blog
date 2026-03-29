@@ -20,8 +20,8 @@ async function getBlog(id: string): Promise<Blog | null> {
 export async function generateStaticParams() {
   const res = await axios.get(`${API_URL}/blogs`);
   const blogs: Blog[] = res.data;
-  
-  return blogs.map((blog) => ({
+
+  return blogs.slice(0, 3).map((blog) => ({
     id: blog.id.toString(),
   }));
 }
