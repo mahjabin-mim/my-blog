@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import axios from "axios";
 
 export const revalidate = 10; // ISR
+export const dynamicParams = true; // by default true
 
 type Blog = {
   id: number;
