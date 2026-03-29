@@ -2,6 +2,8 @@ import { API_URL } from "@/lib/api";
 import { notFound } from "next/navigation";
 import axios from "axios";
 
+export const revalidate = 10;
+
 type Blog = {
   id: number;
   title: string;
