@@ -1,5 +1,6 @@
 import BlogCard from "@/components/BlogCard";
 import { API_URL } from "@/lib/api";
+import axios from "axios";
 
 type Blog = {
   id: number;
@@ -8,15 +9,8 @@ type Blog = {
 };
 
 async function getBlogs(): Promise<Blog[]> {
-  const res = await fetch(`${API_URL}/blogs`, {
-    next: { revalidate: 10 },
-  });
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch blogs");
-  }
-
-  return res.json();
+  const res = await axios.get(`${API_URL}/blogs`);
+  return res.data;
 }
 
 export default async function HomePage() {

@@ -1,5 +1,6 @@
 import { API_URL } from "@/lib/api";
 import { notFound } from "next/navigation";
+import axios from "axios";
 
 type Blog = {
   id: number;
@@ -12,30 +13,14 @@ type PageProps = {
 };
 
 async function getBlog(id: string): Promise<Blog | null> {
-  const res = await fetch(`${API_URL}/blogs/${id}`, {
-    next: { revalidate: 10 }, //isr
-  });
-
-  if (res.status === 404) {
-    return null;
-  }
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch blog");
-  }
-
-  return res.json();
+  const res = await axios.get(`${API_URL}/blogs/${id}`);
+  return res.data;
 }
 
 export async function generateStaticParams() {
-  const res = await fetch(`${API_URL}/blogs`);
-
-  if (!res.ok) {
-    return [];
-  }
-
-  const blogs: Blog[] = await res.json();
-
+  const res = await axios.get(`${API_URL}/blogs`);
+  const blogs: Blog[] = res.data;
+  
   return blogs.map((blog) => ({
     id: blog.id.toString(),
   }));
