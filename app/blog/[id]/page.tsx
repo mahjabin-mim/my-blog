@@ -2,7 +2,7 @@ import { API_URL } from "@/lib/api";
 import { notFound } from "next/navigation";
 import axios from "axios";
 
-export const revalidate = 10;
+export const revalidate = 10; // ISR
 
 type Blog = {
   id: number;
