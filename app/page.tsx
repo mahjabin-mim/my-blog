@@ -2,6 +2,8 @@ import BlogCard from "@/components/BlogCard";
 import { API_URL } from "@/lib/api";
 import axios from "axios";
 
+export const dynamic = "force-dynamic";
+ 
 type Blog = {
   id: number;
   title: string;
